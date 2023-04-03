@@ -1,0 +1,40 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Role/Edit') }}
+        </h2>
+    </x-slot>
+
+    <div class="container mt-6">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                
+                <form action="{{ route('role.update', $role->id) }}" method="POST" class="mb-4 mt-4">
+                   @csrf
+                   @method('PUT')
+                    <div class="mb-4">
+                        <div class="mb-3">
+                            <label for="role_name" class="form-label">Nom</label>
+                            <input id="role_name" type="text" class="form-control" name="nom" value="{{$role->name}}" >
+                        </div>
+                        @foreach ($permissions as $permission)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{$permission->id}}" id="check_permission_{{$permission->id}}" @if($role->hasPermissionTo($permission->name)) checked @endif>
+                            <label class="form-check-label" for="check_permission_{{$permission->id}}">{{$permission->name}}</label>
+                        </div>
+                        @endforeach 
+                    </div>
+                    
+                    <div>
+                        <button type="submit" class="btn btn-success bg-success">Valider</button>
+                        <a href="{{ route('role.index') }}" class="btn btn-danger">Annuler</a>
+                    </div>
+                </form>
+               
+                
+                
+            </div>
+        </div>    
+    </div>
+    
+</x-app-layout>
