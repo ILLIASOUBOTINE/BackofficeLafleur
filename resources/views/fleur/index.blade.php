@@ -7,27 +7,28 @@
 
     <div class="container mt-6">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-6">
-                @if(auth()->user()->can('create'))
+            <div class="col-md-8">
+                <a href="{{ route('fleur.create') }}" class="btn btn-success mb-3">Create</a>
+                {{-- @if(auth()->user()->can('create'))
                     <a href="{{ route('fleur.create') }}" class="btn btn-success mb-3">Create</a>
-                @endif
+                @endif --}}
                 
-
                 <ul class="list-group">
                 @foreach ($fleures as $fleur)
        
    
                     <li class="list-group-item d-flex flex-column  mb-3">
-                        <p>id: {{$fleur->idfleures}} </p>
-                        <p>espece_fleur: {{$fleur->espece_fleur->nom}} </p>
-                        <p>couleur: {{$fleur->couleur->nom}} </p>
+                        <p><span class="fw-semibold">id: </span>{{$fleur->idfleures}} </p>
+                        <p><span class="fw-semibold">espece_fleur: </span>{{$fleur->espece_fleur->nom}} </p>
+                        <p><span class="fw-semibold">couleur: </span>{{$fleur->couleur->nom}} </p>
                         @if($fleur->longueur == null)
-                            <p>longueur: indéfini </p>
+                            <p><span class="fw-semibold">longueur: indéfini </span></p>
                         @else
-                            <p>longueur: {{$fleur->longueur}}cm </p>
+                            <p><span class="fw-semibold">longueur: </span>{{$fleur->longueur}}cm </p>
                         @endif
-                        <p>unite: {{$fleur->unite->nom}} </p>
-                        <div class="d-flex my-2">
+                        <p><span class="fw-semibold">unite: </span>{{$fleur->unite->nom}} </p>
+
+                        <div class="d-flex justify-content-between my-3">
                             <x-btn-edit  route="{{route('fleur.edit', $fleur->idfleures)}}"/>
                             <x-btn-delete  route="{{route('fleur.destroy', $fleur->idfleures)}}"/>
                         </div>
@@ -40,3 +41,5 @@
     </div>
     
 </x-app-layout>
+
+ 

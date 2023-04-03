@@ -11,8 +11,6 @@
                 <a href="{{ route('produit.create') }}" class="btn btn-success mb-3">Create</a>
                 <ul class="list-group">
                 @foreach ($produits as $produit)
-                   
-   
                     <li class="list-group-item d-flex flex-column  mb-3">
                         <p><span class="fw-semibold">id:</span> {{$produit->idproduit}}</p>
                         <p><span class="fw-semibold">nom:</span> {{$produit->nom}} </p>
@@ -23,7 +21,6 @@
                         <p><span class="fw-semibold">ventesTotales:</span> {{$produit->ventesTotales}}</p>
                         <p><span class="fw-semibold">description:</span> {{$produit->description}}</p>
 
-                        
                         <p>
                             <span class="fw-semibold">categorie:</span>
                             @foreach ($produit->categories as $categorie) 
@@ -32,11 +29,10 @@
                         </p>
                          
 
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between my-3">
                             <x-btn-edit  route="{{route('produit.edit', $produit->idproduit)}}"/>
                             <x-btn-delete  route="{{route('produit.destroy', $produit->idproduit)}}"/>
                         </div>
-                       
                     </li>
                 @endforeach 
                 </ul>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Couleur;
+use App\Models\EspeceFleur;
 use App\Models\Fleur;
+use App\Models\Unite;
 use Illuminate\Http\Request;
 
 class FleurController extends Controller
@@ -59,7 +62,10 @@ class FleurController extends Controller
      */
     public function edit(Fleur $fleur)
     {
-        //
+        $especeFleurs = EspeceFleur::all();
+        $couleurs = Couleur::all();
+        $unites = Unite::all();
+        return view('fleur.edit', ['especeFleurs'=>$especeFleurs,'couleurs'=>$couleurs, 'unites'=>$unites, 'fleur'=>$fleur]);
     }
 
     /**
