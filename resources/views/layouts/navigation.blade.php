@@ -19,12 +19,25 @@
                     <x-nav-link :href="route('espece_fleur.index')" :active="request()->routeIs('espece_fleur')">
                         {{ __('Espece_fleur') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('couleur.index')" :active="request()->routeIs('couleur')">
+                        Couleur
+                    </x-nav-link>
+                    <x-nav-link :href="route('unite.index')" :active="request()->routeIs('unite')">
+                        Unite
+                    </x-nav-link>
+                    <x-nav-link :href="route('notre_livraison.index')" :active="request()->routeIs('notre_livraison')">
+                        Notre_livraison 
+                    </x-nav-link>
+                    <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie')">
+                        Categorie
+                    </x-nav-link>
                     <x-nav-link :href="route('fleur.index')" :active="request()->routeIs('fleur')">
                         Fleur
                     </x-nav-link>
-                     <x-nav-link :href="route('produit.index')" :active="request()->routeIs('produit')">
+                    <x-nav-link :href="route('produit.index')" :active="request()->routeIs('produit')">
                         Produit
                     </x-nav-link>
+                    
                     @endhasanyrole
                     @role('super-user')
                     <x-nav-link :href="route('role.index')" :active="request()->routeIs('role')">

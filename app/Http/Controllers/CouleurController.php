@@ -14,7 +14,8 @@ class CouleurController extends Controller
      */
     public function index()
     {
-        //
+        $couleurs = Couleur::all();
+        return view('couleur.index', ['couleurs'=>$couleurs]);
     }
 
     /**
@@ -24,7 +25,7 @@ class CouleurController extends Controller
      */
     public function create()
     {
-        //
+        return view('couleur.create');
     }
 
     /**
@@ -35,7 +36,14 @@ class CouleurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|unique:couleur|max:45',
+        ]);
+    
+        $couleur = new Couleur();
+        $couleur->nom = $request->input('nom');
+        $couleur->save();
+        return redirect()->route('couleur.index');
     }
 
     /**
@@ -57,7 +65,7 @@ class CouleurController extends Controller
      */
     public function edit(Couleur $couleur)
     {
-        //
+        return view('couleur.edit',['couleur'=>$couleur]);
     }
 
     /**
@@ -69,7 +77,13 @@ class CouleurController extends Controller
      */
     public function update(Request $request, Couleur $couleur)
     {
-        //
+        $request->validate([
+            'nom' => 'required|unique:couleur|max:45',
+        ]);
+        
+        $couleur->nom = $request->input('nom');
+        $couleur->save();
+        return redirect()->route('couleur.index');
     }
 
     /**
@@ -80,6 +94,7 @@ class CouleurController extends Controller
      */
     public function destroy(Couleur $couleur)
     {
-        //
+        $couleur->delete();
+        return redirect()->route('couleur.index');
     }
 }

@@ -29,7 +29,12 @@ class FleurController extends Controller
      */
     public function create()
     {
-        //
+       
+        $especeFleurs = EspeceFleur::all();
+        $couleurs = Couleur::all();
+        $unites = Unite::all();
+        return view('fleur.create', ['especeFleurs'=>$especeFleurs,'couleurs'=>$couleurs, 'unites'=>$unites]);
+        
     }
 
     /**
@@ -40,7 +45,17 @@ class FleurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'longueur' => 'nullable|regex:/^[1-9][0-9]+$/i',
+        ]);
+        
+        $fleur = new Fleur();
+        $fleur->longueur = $request->input('longueur');
+        $fleur->couleur_idcouleur = $request->input('couleur');
+        $fleur->unite_idunite = $request->input('unite');
+        $fleur->espece_fleur_idespece_fleur = $request->input('espece_fleur');
+        $fleur->save();
+        return redirect()->route('fleur.index');
     }
 
     /**
@@ -77,7 +92,13 @@ class FleurController extends Controller
      */
     public function update(Request $request, Fleur $fleur)
     {
-        //
+        $request->validate([
+            'longueur' => 'nullable|regex:/^[1-9][0-9]+$/i',
+        ]);
+        
+        $fleur->longueur = $request->input('longueur');
+        $fleur->save();
+        return redirect()->route('fleur.index');
     }
 
     /**
@@ -88,6 +109,7 @@ class FleurController extends Controller
      */
     public function destroy(Fleur $fleur)
     {
-        //
+        $fleur->delete();
+        return redirect()->route('fleur.index');
     }
 }

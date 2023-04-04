@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\EspeceFleurController;
 use App\Http\Controllers\FleurController;
+use App\Http\Controllers\NotreLivraisonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UniteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +54,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => ['role:admin|super-user']], function () {
         Route::resource('espece_fleur', EspeceFleurController::class);
+        Route::resource('couleur', CouleurController::class);
+        Route::resource('unite', UniteController::class);
+        Route::resource('categorie', CategorieController::class);
+        Route::resource('notre_livraison', NotreLivraisonController::class);
+       
         Route::resource('fleur', FleurController::class);
         Route::resource('produit', ProduitController::class);
     });

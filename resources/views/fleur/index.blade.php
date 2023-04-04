@@ -17,7 +17,7 @@
                 @foreach ($fleures as $fleur)
        
    
-                    <li class="list-group-item d-flex flex-column  mb-3">
+                    <li id="fleur_{{$fleur->idfleures}}" class="list-group-item d-flex flex-column  mb-3">
                         <p><span class="fw-semibold">id: </span>{{$fleur->idfleures}} </p>
                         <p><span class="fw-semibold">espece_fleur: </span>{{$fleur->espece_fleur->nom}} </p>
                         <p><span class="fw-semibold">couleur: </span>{{$fleur->couleur->nom}} </p>

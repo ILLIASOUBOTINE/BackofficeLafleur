@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Unite;
 use Illuminate\Http\Request;
 
+
 class UniteController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class UniteController extends Controller
      */
     public function index()
     {
-        //
+        $unites = Unite::all();
+        return view('unite.index', ['unites'=>$unites]);
     }
 
     /**
@@ -24,7 +26,7 @@ class UniteController extends Controller
      */
     public function create()
     {
-        //
+        return view('unite.create');
     }
 
     /**
@@ -35,7 +37,14 @@ class UniteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|unique:unite|max:45',
+        ]);
+    
+        $unite = new Unite();
+        $unite->nom = $request->input('nom');
+        $unite->save();
+        return redirect()->route('unite.index');
     }
 
     /**
@@ -57,7 +66,7 @@ class UniteController extends Controller
      */
     public function edit(Unite $unite)
     {
-        //
+        return view('unite.edit',['unite'=>$unite]);
     }
 
     /**
@@ -69,7 +78,13 @@ class UniteController extends Controller
      */
     public function update(Request $request, Unite $unite)
     {
-        //
+        $request->validate([
+            'nom' => 'required|unique:unite|max:45',
+        ]);
+        
+        $unite->nom = $request->input('nom');
+        $unite->save();
+        return redirect()->route('unite.index');
     }
 
     /**
@@ -80,6 +95,7 @@ class UniteController extends Controller
      */
     public function destroy(Unite $unite)
     {
-        //
+        $unite->delete();
+        return redirect()->route('unite.index');
     }
 }
