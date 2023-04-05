@@ -14,9 +14,14 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $produits = Produit::all();
+        // $produits = Produit::all();
+        $produitsWithFleuresQuantite = Produit::with(['fleures' => function ($query) {
+            $query->select('fleures.*', 'produit_has_fleures.quantite');
+        }])->get();
+        // dd($produitsWithFleuresQuantite);
+        return view('produit.index', ['produitsWithFleuresQuantite'=>$produitsWithFleuresQuantite]);
         // dd($produits);
-        return view('produit.index', ['produits'=>$produits]);
+        // return view('produit.index', ['produits'=>$produits]);
     }
 
     /**
@@ -48,7 +53,11 @@ class ProduitController extends Controller
      */
     public function show(Produit $produit)
     {
-        //
+        $fleuresWithQuantite = $produit->fleures()->select('fleures.*', 'produit_has_fleures.quantite')->get();
+        return view('produit.show', [
+            'produit'=>$produit,
+            'fleuresWithQuantite'=>$fleuresWithQuantite
+        ]);
     }
 
     /**

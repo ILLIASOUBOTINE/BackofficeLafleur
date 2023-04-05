@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Fleur extends Model
 {
@@ -23,4 +24,9 @@ class Fleur extends Model
     public function espece_fleur(){
         return $this->belongsTo(EspeceFleur::class);
     }
+    
+    public function produits(): BelongsToMany {
+        return $this->belongsToMany(Fleur::class, 'produit_has_fleures','fleures_idfleures','produit_idproduit');
+    }
+    
 }

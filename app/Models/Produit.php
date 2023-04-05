@@ -19,8 +19,15 @@ class Produit extends Model
         return $this->belongsTo(Unite::class);
     }
 
-    public function categories(): BelongsToMany
-    {
+    public function categories(): BelongsToMany {
         return $this->belongsToMany(Categorie::class, 'categorie_has_produit','produit_idproduit','categorie_idcategorie');
+    }
+
+    public function photos(): BelongsToMany {
+        return $this->belongsToMany(Photo::class, 'photo_has_produit','produit_idproduit','photo_idphoto');
+    }
+
+    public function fleures(): BelongsToMany {
+        return $this->belongsToMany(Fleur::class, 'produit_has_fleures','produit_idproduit','fleures_idfleures');
     }
 }

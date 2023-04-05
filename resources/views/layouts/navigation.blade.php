@@ -31,6 +31,9 @@
                     <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie')">
                         Categorie
                     </x-nav-link>
+                    <x-nav-link :href="route('photo.index')" :active="request()->routeIs('photo')">
+                        Photo
+                    </x-nav-link>
                     <x-nav-link :href="route('fleur.index')" :active="request()->routeIs('fleur')">
                         Fleur
                     </x-nav-link>

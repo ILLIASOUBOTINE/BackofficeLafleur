@@ -1,17 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Produit') }}
+            {{ __('Produit/Show') }}
         </h2>
     </x-slot>
 
     <div class="container mt-6">
         <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-                <a href="{{ route('produit.create') }}" class="btn btn-success mb-3">Create</a>
-                <ul class="list-group">
-                @foreach ($produitsWithFleuresQuantite as $produit)
-                    <li class="list-group-item d-flex flex-column  mb-3">
+                <a href="{{ route('previous_page') }}" class="btn btn-success mb-3">Retour</a>
+                {{-- <ul class="list-group">
+                @foreach ($produitsWithFleuresQuantite as $produit) --}}
+                    <div class="list-group-item d-flex flex-column  mb-3">
                         <p><span class="fw-semibold">id:</span> {{$produit->idproduit}}</p>
                         <p><span class="fw-semibold">nom:</span> {{$produit->nom}} </p>
                         <p><span class="fw-semibold">unite:</span> {{$produit->unite->nom}}</p>
@@ -38,7 +38,7 @@
                         <div>
                             <p class="fw-semibold">fleur:</p>
                             <div class="list-group">
-                            @foreach ($produit->fleures as $fleur) 
+                            @foreach ($fleuresWithQuantite as $fleur) 
                                 <a href="#" class="list-group-item list-group-item-action">
                                     <p class="mb-1"><span class="fw-semibold">id: </span>{{$fleur->idfleures}}</p>
                                     <p class="mb-1"><span class="fw-semibold">nom: </span>{{$fleur->espece_fleur->nom}}</p>
@@ -55,12 +55,12 @@
 
                         <div class="d-flex justify-content-between my-3">
                             <x-btn-edit  route="{{route('produit.edit', $produit->idproduit)}}"/>
-                            <a href="{{ route('produit.show', $produit->idproduit) }}" class="btn btn-success">show</a>
+                            <a href="{{ route('produit.index') }}" class="btn btn-success">Show All</a>
                             <x-btn-delete  route="{{route('produit.destroy', $produit->idproduit)}}"/>
                         </div>
-                    </li>
-                @endforeach 
-                </ul>
+                    </div>
+                {{-- @endforeach 
+                </ul> --}}
             </div>
         </div>    
     </div>

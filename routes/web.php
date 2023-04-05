@@ -5,12 +5,14 @@ use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\EspeceFleurController;
 use App\Http\Controllers\FleurController;
 use App\Http\Controllers\NotreLivraisonController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UniteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -37,6 +41,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/previous_page', function () {
+        return redirect()->back();
+    })->name('previous_page');
+   
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -58,9 +67,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('unite', UniteController::class);
         Route::resource('categorie', CategorieController::class);
         Route::resource('notre_livraison', NotreLivraisonController::class);
-       
+        Route::resource('photo', PhotoController::class);
+        
         Route::resource('fleur', FleurController::class);
         Route::resource('produit', ProduitController::class);
+
+      
     });
     
 });
