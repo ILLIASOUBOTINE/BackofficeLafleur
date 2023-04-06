@@ -28,7 +28,7 @@
                             @endforeach
                         </p>
 
-                          <p>
+                        <p>
                             <span class="fw-semibold">photo:</span>
                             @foreach ($produit->photos as $photo) 
                             <span class="badge text-bg-light">{{$photo->img_url}}</span> 

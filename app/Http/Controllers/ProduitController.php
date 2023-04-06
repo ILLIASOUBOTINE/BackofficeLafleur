@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
+use App\Models\Fleur;
+use App\Models\Photo;
 use App\Models\Produit;
+use App\Models\Unite;
 use Illuminate\Http\Request;
 
 class ProduitController extends Controller
@@ -31,7 +35,18 @@ class ProduitController extends Controller
      */
     public function create()
     {
-        //
+        $unites = Unite::all();
+        $categories = Categorie::all();
+        $photos = Photo::all();
+        $fleures = Fleur::all();
+        
+        return view('produit.create', [
+            
+            'unites'=>$unites,
+            'categories'=>$categories,
+            'photos'=>$photos,
+            'fleures'=>$fleures
+        ]);
     }
 
     /**
@@ -68,7 +83,18 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        //
+        $unites = Unite::all();
+        $categories = Categorie::all();
+        $photos = Photo::all();
+        $fleures = Fleur::all();
+        
+        return view('produit.edit', [
+            'produit'=>$produit,
+            'unites'=>$unites,
+            'categories'=>$categories,
+            'photos'=>$photos,
+            'fleures'=>$fleures
+        ]);
     }
 
     /**

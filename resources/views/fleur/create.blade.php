@@ -45,7 +45,7 @@
                             <input id="fleur_longueur" type="number" class="form-control" name="longueur" > 
                         </div>
                         <div class="mb-3">
-                            <label for="fleur_unite" class="form-label">Couleur:</label>
+                            <label for="fleur_unite" class="form-label">Unite:</label>
                             <select id="fleur_unite" class="form-select" aria-label="Default select example" name="unite" type="text">
                             @foreach($unites as $unite)
                                 <option value="{{$unite->idunite}}">{{$unite->nom}}</option>
