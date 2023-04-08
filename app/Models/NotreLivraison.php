@@ -12,7 +12,7 @@ class NotreLivraison extends Model
     public $timestamps = false;
     protected $fillable = array('nom_ville');
 
-    // public function fleures(){
-    //     return $this->hasMany(Fleur::class);
-    // }
+    public function livraisons(){
+        return $this->hasMany(Livraison::class);
+    }
 }

@@ -22,7 +22,7 @@
                         <p><span class="fw-semibold">espece_fleur: </span>{{$fleur->espece_fleur->nom}} </p>
                         <p><span class="fw-semibold">couleur: </span>{{$fleur->couleur->nom}} </p>
                         @if($fleur->longueur == null)
-                            <p><span class="fw-semibold">longueur: indéfini </span></p>
+                            <p><span class="fw-semibold">longueur: </span>indéfini</p>
                         @else
                             <p><span class="fw-semibold">longueur: </span>{{$fleur->longueur}}cm </p>
                         @endif

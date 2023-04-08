@@ -12,27 +12,41 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    @hasanyrole('super-user|admin')
-                    <x-nav-link :href="route('espece_fleur.index')" :active="request()->routeIs('espece_fleur')">
-                        {{ __('Espece_fleur') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('couleur.index')" :active="request()->routeIs('couleur')">
-                        Couleur
-                    </x-nav-link>
-                    <x-nav-link :href="route('unite.index')" :active="request()->routeIs('unite')">
-                        Unite
-                    </x-nav-link>
-                    <x-nav-link :href="route('notre_livraison.index')" :active="request()->routeIs('notre_livraison')">
-                        Notre_livraison 
-                    </x-nav-link>
-                    <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie')">
-                        Categorie
-                    </x-nav-link>
-                    <x-nav-link :href="route('photo.index')" :active="request()->routeIs('photo')">
-                        Photo
+                     @hasanyrole('super-user|admin')
+                    <div class="dropdown align-self-center">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            simple tableaux
+                        </a>
+
+                        <div class="dropdown-menu ">
+                            <div class="d-flex flex-column">
+                                <x-nav-link :href="route('espece_fleur.index')" :active="request()->routeIs('espece_fleur')">
+                                    {{ __('Espece_fleur') }}
+                                </x-nav-link>
+                                <x-nav-link :href="route('couleur.index')" :active="request()->routeIs('couleur')">
+                                    Couleur
+                                </x-nav-link>
+                                <x-nav-link :href="route('unite.index')" :active="request()->routeIs('unite')">
+                                    Unite
+                                </x-nav-link>
+                                <x-nav-link :href="route('notre_livraison.index')" :active="request()->routeIs('notre_livraison')">
+                                    Notre_livraison 
+                                </x-nav-link>
+                                <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie')">
+                                    Categorie
+                                </x-nav-link>
+                                <x-nav-link :href="route('photo.index')" :active="request()->routeIs('photo')">
+                                    Photo
+                                </x-nav-link>
+                            </div>
+                        </div>
+                    </div>
+                   <x-nav-link :href="route('livraison.index')" :active="request()->routeIs('livraison')">
+                       Livraison
                     </x-nav-link>
                     <x-nav-link :href="route('fleur.index')" :active="request()->routeIs('fleur')">
                         Fleur
@@ -42,6 +56,7 @@
                     </x-nav-link>
                     
                     @endhasanyrole
+                    
                     @role('super-user')
                     <x-nav-link :href="route('role.index')" :active="request()->routeIs('role')">
                         Roles

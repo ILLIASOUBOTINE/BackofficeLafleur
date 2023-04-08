@@ -4,6 +4,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\EspeceFleurController;
 use App\Http\Controllers\FleurController;
+use App\Http\Controllers\LivraisonController;
 use App\Http\Controllers\NotreLivraisonController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProduitController;
@@ -68,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('categorie', CategorieController::class);
         Route::resource('notre_livraison', NotreLivraisonController::class);
         Route::resource('photo', PhotoController::class);
-        
+        Route::resource('livraison', LivraisonController::class);
         Route::resource('fleur', FleurController::class);
         Route::resource('produit', ProduitController::class);
 
