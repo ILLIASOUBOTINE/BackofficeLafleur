@@ -7,6 +7,7 @@
 
     <div class="container mt-6">
         <div class="row d-flex flex-column align-items-center">
+            
             @if ($errors->any())
                 <div class="alert alert-danger col-md-8">
                     <ul>
@@ -17,16 +18,18 @@
                 </div>
             @endif
             <div class="col-md-8">
+                <h3 class="my-3 fs-4">Les champs avec (*) sont obligatoires!</h3>
+                           
                 
                 <form action="{{ route('produit.store') }}" method="POST" class="mb-4 mt-4">
                    @csrf
                     <div class="mb-4">
                         <div class="mb-3">
-                            <label for="produit_nom" class="form-label">Nom:</label>
+                            <label for="produit_nom" class="form-label" required>Nom*:</label>
                             <input id="produit_nom" type="text" class="form-control" name="nom" > 
                         </div>
                         <div class="mb-3">
-                            <label for="produit_unite" class="form-label">Unite:</label>
+                            <label for="produit_unite" class="form-label">Unite*:</label>
                             <select id="produit_unite" class="form-select" aria-label="Default select example" name="unite" >
                             @foreach($unites as $unite)
                                 <option value="{{$unite->idunite}}">{{$unite->nom}}</option>
@@ -38,15 +41,15 @@
                             <input id="produit_longueur" type="number" class="form-control" name="longueur" > 
                         </div>
                         <div class="mb-3">
-                            <label for="produit_prix" class="form-label">Prix:</label>
-                            <input id="produit_prix" type="number" class="form-control" name="prix" > 
+                            <label for="produit_prix" class="form-label">Prix*:</label>
+                            <input id="produit_prix" type="number" step="0.01" min="0" class="form-control" name="prix_unite" > 
                         </div>
                         <div class="mb-3">
-                            <label for="produit_quantiteTotale" class="form-label">Quantite totale:</label>
+                            <label for="produit_quantiteTotale" class="form-label">Quantite totale*:</label>
                             <input id="produit_quantiteTotale" type="number" class="form-control" name="quantiteTotale" > 
                         </div>
                           <div class="mb-3">
-                            <label for="produit_description" class="form-label">Description:</label>
+                            <label for="produit_description" class="form-label">Description*:</label>
                             <textarea id="produit_description" type="text" class="form-control" name="description" ></textarea>
                         </div>
                         {{-- <div class="mb-3">
@@ -58,7 +61,7 @@
                             </select>
                         </div> --}}
                         <div class="mb-3">
-                            <label  class="form-label">Categorie:</label>
+                            <label  class="form-label">Categorie*:</label>
                             @foreach($categories as $categorie)
                                <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="categories[]" value="{{$categorie->idcategorie}}" id="check_categorie_{{$categorie->idcategorie}}">
@@ -67,7 +70,7 @@
                             @endforeach
                         </div>    
                         <div class="mb-3">
-                            <label  class="form-label">Photo:</label>
+                            <label  class="form-label">Photo*:</label>
                             @foreach($photos as $photo)
                                <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="photos[]" value="{{$photo->idphoto}}" id="check_photo_{{$photo->idphoto}}">
@@ -85,7 +88,7 @@
                             </select>
                         </div> --}}
                         <div class="mb-3">
-                            <label class="form-label">Fleur:</label>
+                            <label class="form-label">Fleur*:</label>
                           
                             @foreach($fleures as $fleur)
                             <div class="form-check ">
@@ -103,7 +106,7 @@
 
                                     <div >
                                         <label for="produit_quantite_{{$fleur->idfleures}}" class="form-label"><span class="fw-semibold">quantite:</span></label>
-                                        <input id="produit_quantite_{{$fleur->idfleures}}" type="number" min="0" class="form-control" name="quantite{{$fleur->idfleures}}" > 
+                                        <input id="produit_quantite_{{$fleur->idfleures}}" type="number" value="1" min="1" class="form-control" name="quantites[{{$fleur->idfleures}}]" > 
                                     </div>    
                                 </label>
                                 
@@ -112,14 +115,7 @@
                             
                         </div>
                        
-                        {{-- <div class="mb-3">
-                            <label for="fleur_unite" class="form-label">Couleur:</label>
-                            <select id="fleur_unite" class="form-select" aria-label="Default select example" name="unite" type="text">
-                            @foreach($unites as $unite)
-                                <option value="{{$unite->idunite}}">{{$unite->nom}}</option>
-                            @endforeach
-                            </select>
-                        </div> --}}
+                  
                        
                     </div>
                     

@@ -18,14 +18,13 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        // $produits = Produit::all();
+        
         $produitsWithFleuresQuantite = Produit::with(['fleures' => function ($query) {
             $query->select('fleures.*', 'produit_has_fleures.quantite');
         }])->get();
-        // dd($produitsWithFleuresQuantite);
+      
         return view('produit.index', ['produitsWithFleuresQuantite'=>$produitsWithFleuresQuantite]);
-        // dd($produits);
-        // return view('produit.index', ['produits'=>$produits]);
+       
     }
 
     /**
@@ -57,7 +56,37 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $request->validate([
+            'nom' => 'required|max:45',
+            'longueur' => 'nullable|integer|min:1',
+            'prix_unite' => 'required|numeric|min:0|max:999.99',
+            'description' => 'required|min:10|max:255',
+            'quantiteTotale' => 'required|integer|min:1',
+            'categories' => 'required',
+            'photos' => 'required',
+            'fleures' => 'required',
+        ]);
+        
+        $produit = new Produit();
+        $produit->nom = $request->input('nom');
+        $produit->unite_idunite = $request->input('unite');
+        $produit->longueur = $request->input('longueur');
+        $produit->prix_unite = $request->input('prix_unite');
+        $produit->quantiteTotale = $request->input('quantiteTotale');
+        $produit->ventesTotales = 0;
+        $produit->description = $request->input('description');
+        $produit->save();
+         
+        $produit->categories()->attach($request->input('categories')); 
+        $produit->photos()->attach($request->input('photos'));
+        
+        $quantites = $request->input('quantites');
+        foreach($request->input('fleures') as $idfleur){
+            $produit->fleures()->attach($idfleur,['quantite'=>$quantites[$idfleur]]); 
+        }
+        
+        return redirect()->route('produit.show',$produit);
     }
 
     /**
@@ -87,13 +116,16 @@ class ProduitController extends Controller
         $categories = Categorie::all();
         $photos = Photo::all();
         $fleures = Fleur::all();
+        $fleuresWithQuantite = $produit->fleures()->select('fleures.*', 'produit_has_fleures.quantite')->get();
+        // dd($produit->categories);
         
         return view('produit.edit', [
             'produit'=>$produit,
             'unites'=>$unites,
             'categories'=>$categories,
             'photos'=>$photos,
-            'fleures'=>$fleures
+            'fleures'=>$fleures,
+            'fleuresWithQuantite'=>$fleuresWithQuantite
         ]);
     }
 
@@ -106,7 +138,40 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        //
+        $request->validate([
+            'nom' => 'required|max:45',
+            'longueur' => 'nullable|integer|min:1',
+            'prix_unite' => 'required|numeric|min:0|max:999.99',
+            'description' => 'required|min:10|max:255',
+            'quantiteTotale' => 'required|integer|min:1',
+            'categories' => 'required',
+            'photos' => 'required',
+            'fleures' => 'required',
+        ]);
+        
+       
+        $produit->nom = $request->input('nom');
+        $produit->unite_idunite = $request->input('unite');
+        $produit->longueur = $request->input('longueur');
+        $produit->prix_unite = $request->input('prix_unite');
+        $produit->quantiteTotale = $request->input('quantiteTotale');
+        // $produit->ventesTotales = 0;
+        $produit->description = $request->input('description');
+        
+        $produit->categories()->detach(); 
+        $produit->photos()->detach(); 
+        $produit->fleures()->detach(); 
+        $produit->save();
+         
+        $produit->categories()->attach($request->input('categories')); 
+        $produit->photos()->attach($request->input('photos'));
+        
+        $quantites = $request->input('quantites');
+        foreach($request->input('fleures') as $idfleur){
+            $produit->fleures()->attach($idfleur,['quantite'=>$quantites[$idfleur]]); 
+        }
+        
+        return redirect()->route('produit.show',$produit);
     }
 
     /**
@@ -117,6 +182,10 @@ class ProduitController extends Controller
      */
     public function destroy(Produit $produit)
     {
-        //
+        $produit->categories()->detach(); 
+        $produit->photos()->detach(); 
+        $produit->fleures()->detach();
+        $produit->delete();
+        return redirect()->route('produit.index');
     }
 }

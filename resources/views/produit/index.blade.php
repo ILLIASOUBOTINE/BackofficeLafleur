@@ -53,11 +53,11 @@
                        
                          
 
-                        {{-- <div class="d-flex justify-content-between my-3">
-                            <x-btn-edit  route="{{route('produit.edit', $produit->idproduit)}}"/>
+                         <div class="d-flex justify-content-between my-3">
+                            <x-btn-edit  route="{{ route('produit.edit', $produit->idproduit) }}"/>
                             <a href="{{ route('produit.show', $produit->idproduit) }}" class="btn btn-success">show</a>
                             <x-btn-delete  route="{{route('produit.destroy', $produit->idproduit)}}"/>
-                        </div> --}}
+                        </div>
                     </li>
                 @endforeach 
                 </ul>

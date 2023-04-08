@@ -9,8 +9,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-8">
                 <a href="{{ route('previous_page') }}" class="btn btn-success mb-3">Retour</a>
-                {{-- <ul class="list-group">
-                @foreach ($produitsWithFleuresQuantite as $produit) --}}
+              
                     <div class="list-group-item d-flex flex-column  mb-3">
                         <p><span class="fw-semibold">id:</span> {{$produit->idproduit}}</p>
                         <p><span class="fw-semibold">nom:</span> {{$produit->nom}} </p>
@@ -59,8 +58,7 @@
                             <x-btn-delete  route="{{route('produit.destroy', $produit->idproduit)}}"/>
                         </div>
                     </div>
-                {{-- @endforeach 
-                </ul> --}}
+                
             </div>
         </div>    
     </div>
