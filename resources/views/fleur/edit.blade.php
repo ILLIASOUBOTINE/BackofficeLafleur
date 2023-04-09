@@ -25,7 +25,7 @@
                     <div class="mb-4">
                         <div class="mb-3">
                             <label for="fleur_name" class="form-label">Espace_fleur:</label>
-                            <select id="fleur_name" class="form-select" aria-label="Default select example" name="espace_fleur" type="text">
+                            <select id="fleur_name" class="form-select" aria-label="Default select example" name="espace_fleur" >
                             @foreach($especeFleurs as $especeFleur)
                                 <option value="{{$especeFleur->idespece_fleur}}"  @if($fleur->espece_fleur->idespece_fleur == $especeFleur->idespece_fleur) selected @endif>{{$especeFleur->nom}}</option>
                             @endforeach
@@ -35,7 +35,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="fleur_couleur" class="form-label">Couleur:</label>
-                            <select id="fleur_couleur" class="form-select" aria-label="Default select example" name="couleur" type="text">
+                            <select id="fleur_couleur" class="form-select" aria-label="Default select example" name="couleur" >
                             @foreach($couleurs as $couleur)
                                 <option value="{{$couleur->idcouleur}}"  @if($fleur->couleur->idcouleur == $couleur->idcouleur) selected @endif>{{$couleur->nom}}</option>
                             @endforeach
@@ -47,7 +47,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="fleur_unite" class="form-label">Couleur:</label>
-                            <select id="fleur_unite" class="form-select" aria-label="Default select example" name="unite" type="text">
+                            <select id="fleur_unite" class="form-select" aria-label="Default select example" name="unite" >
                             @foreach($unites as $unite)
                                 <option value="{{$unite->idunite}}"  @if($fleur->unite->idunite == $unite->idunite) selected @endif>{{$unite->nom}}</option>
                             @endforeach

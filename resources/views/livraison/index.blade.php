@@ -8,7 +8,7 @@
     <div class="container mt-6">
         <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-                <a href="{{ route('livraison.create') }}" class="btn btn-success mb-3">Create</a>
+                
                 
                 
                 <ul class="list-group">
@@ -34,7 +34,7 @@
 
                         <div class="d-flex justify-content-between my-3">
                             <x-btn-edit  route="{{route('livraison.edit', $livraison->idlivraison)}}"/>
-                            <x-btn-delete  route="{{route('livraison.destroy', $livraison->idlivraison)}}"/>
+                            {{-- <x-btn-delete  route="{{route('livraison.destroy', $livraison->idlivraison)}}"/> --}}
                         </div>
                        
                     </li>

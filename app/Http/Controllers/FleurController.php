@@ -97,6 +97,9 @@ class FleurController extends Controller
         ]);
         
         $fleur->longueur = $request->input('longueur');
+        $fleur->couleur_idcouleur = $request->input('couleur');
+        $fleur->unite_idunite = $request->input('unite');
+        $fleur->espece_fleur_idespece_fleur = $request->input('espace_fleur');
         $fleur->save();
         return redirect()->route('fleur.index');
     }

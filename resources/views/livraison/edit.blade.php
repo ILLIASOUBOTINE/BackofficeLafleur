@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Fleur/Edit') }}
+            {{ __('Livraison/Edit') }}
         </h2>
     </x-slot>
 
@@ -19,46 +19,63 @@
 
             <div class="col-md-8">
                 
-                <form action="{{ route('fleur.update', $fleur->idfleures) }}" method="POST" class="mb-4 mt-4">
+                <form action="{{ route('livraison.update', $livraison->idlivraison) }}" method="POST" class="mb-4 mt-4">
                    @csrf
                    @method('PUT')
                     <div class="mb-4">
+                        <h3 class="my-3 fs-4">Les champs avec (*) sont obligatoires!</h3>
+                        <p class="mb-3"><span class="fw-semibold">id: </span>{{$livraison->idlivraison}} </p>
                         <div class="mb-3">
-                            <label for="fleur_name" class="form-label">Espace_fleur:</label>
-                            <select id="fleur_name" class="form-select" aria-label="Default select example" name="espace_fleur" type="text">
-                            @foreach($especeFleurs as $especeFleur)
-                                <option value="{{$especeFleur->idespece_fleur}}"  @if($fleur->espece_fleur->idespece_fleur == $especeFleur->idespece_fleur) selected @endif>{{$especeFleur->nom}}</option>
+                            <label for="livraison_date_prevu" class="form-label">date_prevu*:</label>
+                            <input id="livraison_date_prevu" type="date" class="form-control" name="date_prevu" value="{{$livraison->date_prevu}}" > 
+                        </div>
+                        <div class="mb-3">
+                            <label for="livraison_date_livre" class="form-label">date_livre:</label>
+                            @if($livraison->date_livre == null)
+                                <input id="livraison_date_livre" type="date" class="form-control" name="date_livre" value="non livres" > 
+                            @else
+                                <input id="livraison_date_livre" type="date" class="form-control" name="date_livre" value="{{$livraison->date_livre}}" > 
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="livraison_notre_livraison" class="form-label">ville*:</label>
+                            <select id="livraison_notre_livraison" class="form-select" aria-label="Default select example" name="notre_livraison" >
+                            @foreach($notreLivraisons as $notreLivraison)
+                                <option value="{{$notreLivraison->idnotre_livraison}}"  @if($livraison->notreLivraison->idnotre_livraison == $notreLivraison->idnotre_livraison) selected @endif>{{$notreLivraison->nom_ville}}</option>
                             @endforeach
                             </select>
-                            {{-- <label for="role_name" class="form-label">Nom de fleur</label>
-                            <input id="role_name" type="text" class="form-control" name="nom" value="{{$fleur->espece_fleur->nom}}" > --}}
+                            
                         </div>
                         <div class="mb-3">
-                            <label for="fleur_couleur" class="form-label">Couleur:</label>
-                            <select id="fleur_couleur" class="form-select" aria-label="Default select example" name="couleur" type="text">
-                            @foreach($couleurs as $couleur)
-                                <option value="{{$couleur->idcouleur}}"  @if($fleur->couleur->idcouleur == $couleur->idcouleur) selected @endif>{{$couleur->nom}}</option>
-                            @endforeach
-                            </select>
+                            <label for="livraison_rue" class="form-label">rue*:</label>
+                            <input id="livraison_rue"  class="form-control" name="rue" value="{{$livraison->rue}}" > 
                         </div>
                         <div class="mb-3">
-                            <label for="fleur_longueur" class="form-label">Longueur:</label>
-                            <input id="fleur_longueur" type="number" class="form-control" name="longueur" value="{{$fleur->longueur}}" > 
+                            <label for="livraison_num_maison" class="form-label">numéro de maison*:</label>
+                            <input id="livraison_num_maison"  class="form-control" name="num_maison" value="{{$livraison->num_maison}}" > 
                         </div>
                         <div class="mb-3">
-                            <label for="fleur_unite" class="form-label">Couleur:</label>
-                            <select id="fleur_unite" class="form-select" aria-label="Default select example" name="unite" type="text">
-                            @foreach($unites as $unite)
-                                <option value="{{$unite->idunite}}"  @if($fleur->unite->idunite == $unite->idunite) selected @endif>{{$unite->nom}}</option>
-                            @endforeach
-                            </select>
+                            <label for="livraison_num_appart" class="form-label">numéro d'appartement:</label>
+                            @if($livraison->num_appart == null)
+                                <input id="livraison_num_appart"  class="form-control" name="num_appart"  > 
+                            @else
+                                <input id="livraison_num_appart"  class="form-control" name="num_appart" value="{{$livraison->num_appart}}" > 
+                            @endif
                         </div>
+                        <div class="mb-3">
+                            <label for="livraison_num_telephone" class="form-label">numéro de téléphone*:</label>
+                            <input id="livraison_num_telephone"  class="form-control" name="num_telephone" value="{{$livraison->num_telephone}}" > 
+                        </div>
+
+
+                      
+                        
                        
                     </div>
                     
                     <div class="d-flex justify-content-between my-3">
                         <button type="submit" class="btn btn-success bg-success">Valider</button>
-                        <a href="{{ route('fleur.index') }}" class="btn btn-danger">Annuler</a>
+                        <a href="{{ route('livraison.index') }}" class="btn btn-danger">Annuler</a>
                     </div>
                 </form>
                

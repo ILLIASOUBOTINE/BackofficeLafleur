@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Livraison;
+use App\Models\NotreLivraison;
 use Illuminate\Http\Request;
 
 class LivraisonController extends Controller
@@ -58,7 +59,11 @@ class LivraisonController extends Controller
      */
     public function edit(Livraison $livraison)
     {
-        //
+        $notreLivraisons = NotreLivraison::all();
+        return view('livraison.edit',[
+            'notreLivraisons'=>$notreLivraisons,
+            'livraison'=>$livraison
+        ]);
     }
 
     /**
@@ -70,7 +75,26 @@ class LivraisonController extends Controller
      */
     public function update(Request $request, Livraison $livraison)
     {
-        //
+        $request->validate([
+            'date_prevu' => 'required|date',
+            'date_livre' => 'nullable|date',
+            'rue' => 'required|max:45',
+            'num_maison' => 'required|max:5',
+            'num_appart' => 'nullable|max:5',
+            'num_telephone' => 'required|regex:/^[0-9]+$/i|size:10',
+        ]);
+        
+       
+        $livraison->date_prevu = $request->input('date_prevu');
+        $livraison->date_livre = $request->input('date_livre');
+        $livraison->notre_livraison_idnotre_livraison = $request->input('notre_livraison');
+        $livraison->rue = $request->input('rue');
+        $livraison->num_maison = $request->input('num_maison');
+        $livraison->num_appart = $request->input('num_appart');
+        $livraison->num_telephone = $request->input('num_telephone');
+        
+        $livraison->save();
+        return redirect()->route('livraison.index',$livraison);
     }
 
     /**
