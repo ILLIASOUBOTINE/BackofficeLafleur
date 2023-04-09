@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Livraison extends Model
 {
     protected $table = 'livraison';
@@ -15,4 +16,9 @@ class Livraison extends Model
     public function notreLivraison(){
         return $this->belongsTo(NotreLivraison::class);
     }
+
+    public function commande() {
+        return $this->hasOne(Commande::class);
+    }
+    
 }

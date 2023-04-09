@@ -11,4 +11,8 @@ class Client extends Model
     protected $primaryKey = 'idclient';
     public $timestamps = false;
     protected $fillable = array('email','mot_passe');
+
+    public function commandes(){
+        return $this->hasMany(Commande::class);
+    }
 }

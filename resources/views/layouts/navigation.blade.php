@@ -54,6 +54,9 @@
                     <x-nav-link :href="route('produit.index')" :active="request()->routeIs('produit')">
                         Produit
                     </x-nav-link>
+                    <x-nav-link :href="route('commande.index')" :active="request()->routeIs('commande')">
+                        Commande
+                    </x-nav-link>
                     
                     @endhasanyrole
                     
