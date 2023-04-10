@@ -30,4 +30,8 @@ class Produit extends Model
     public function fleures(): BelongsToMany {
         return $this->belongsToMany(Fleur::class, 'produit_has_fleures','produit_idproduit','fleures_idfleures');
     }
+
+    public function commandes() {
+        return $this->belongsToMany(Produit::class, 'produit_has_commandes','produit_idproduit','commandes_idcommandes');
+    }
 }

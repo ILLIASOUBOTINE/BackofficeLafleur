@@ -74,7 +74,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('fleur', FleurController::class);
         Route::resource('produit', ProduitController::class);
         Route::resource('commande', CommandeController::class);
-      
+        
+        Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
+        Route::get('commandeByDate', [CommandeController::class, 'getByDate'])->name('commande.getByDate');
+        Route::get('commandeNonLivres', [CommandeController::class, 'nonLivres'])->name('commande.nonLivres');
+        Route::get('commandeLivre', [CommandeController::class, 'livre'])->name('commande.livre');
+        Route::get('commandeToday', [CommandeController::class, 'today'])->name('commande.today');
+        Route::get('commandeTomorrow', [CommandeController::class, 'tomorrow'])->name('commande.tomorrow');
     });
     
 });
