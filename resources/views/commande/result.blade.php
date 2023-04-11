@@ -10,13 +10,19 @@
     <div class="container mt-6">
         
         <div class="row d-flex justify-content-center">
-        @if ($errors->any())
+            @if ($errors->any())
                 <div class="alert alert-danger col-md-8">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
+                </div>
+            @endif
+            
+            @if (count($commandesWithProduitsQuantiteWithPrixtotal) === 0)
+                <div class="alert alert-danger col-md-8">
+                  Aucune commande pour cette demande!
                 </div>
             @endif
             <div class="col-md-8">

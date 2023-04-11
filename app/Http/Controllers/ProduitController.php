@@ -58,7 +58,7 @@ class ProduitController extends Controller
     {
     
         $request->validate([
-            'nom' => 'required|max:45',
+            'nom' => 'required|unique:produit|max:45',
             'longueur' => 'nullable|integer|min:1',
             'prix_unite' => 'required|numeric|min:0|max:999.99',
             'description' => 'required|min:10|max:255',

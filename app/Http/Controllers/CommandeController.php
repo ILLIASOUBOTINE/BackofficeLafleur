@@ -282,4 +282,73 @@ class CommandeController extends Controller
             'title'=>"Livraison prevu: ".$date_prev,
         ]);
     }
+
+    /**
+     * Display a listing of the resource.
+     * 
+     *@param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getByDateCreate(Request $request)
+    {   
+        $request->validate([
+            'date_create_exacte' => 'required',
+        ]);    
+        
+        $date = $request->input('date_create_exacte');
+        $commandesWithProduitsQuantiteWithPrixtotal = Commande::with(['produits'=>function($query){
+            $query->select('produit.*','produit_has_commandes.quantite')
+            ->selectRaw('SUM(produit.prix_unite*produit_has_commandes.quantite) as total_produit')
+            ->groupBy('produit.idproduit', 'produit_has_commandes.quantite','produit_has_commandes.commandes_idcommandes');
+        }])
+        ->whereHas('livraison', function ($query) use( $date ) {
+            $query->whereDate('date_create',$date);
+        })->get();
+        
+         $commandesWithProduitsQuantiteWithPrixtotal->each(function($commande){
+            $commande->total_commande = $commande->produits->SUM('total_produit');
+        });   
+        
+        return view('commande.result', [
+            'commandesWithProduitsQuantiteWithPrixtotal'=>$commandesWithProduitsQuantiteWithPrixtotal,
+            'title'=>"Livraison prevu: ".$date,
+        ]);
+    }
+
+      /**
+     * Display a listing of the resource.
+     * 
+     *@param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getByDateCreateList(Request $request)
+    {   
+        $request->validate([
+            'date_create_start' => 'required',
+            'date_create_end' => 'required',
+        ]); 
+           
+         
+        $dateStart = $request->input('date_create_start');
+        $dateEnd = $request->input('date_create_end');
+       
+        
+        $commandesWithProduitsQuantiteWithPrixtotal = Commande::with(['produits'=>function($query){
+            $query->select('produit.*','produit_has_commandes.quantite')
+            ->selectRaw('SUM(produit.prix_unite*produit_has_commandes.quantite) as total_produit')
+            ->groupBy('produit.idproduit', 'produit_has_commandes.quantite','produit_has_commandes.commandes_idcommandes');
+        }])
+        ->whereHas('livraison', function ($query) use( $dateStart, $dateEnd ) {
+            $query->whereBetween('date_create',[$dateStart, $dateEnd]);
+        })->get();
+        
+         $commandesWithProduitsQuantiteWithPrixtotal->each(function($commande){
+            $commande->total_commande = $commande->produits->SUM('total_produit');
+        });   
+        
+        return view('commande.result', [
+            'commandesWithProduitsQuantiteWithPrixtotal'=>$commandesWithProduitsQuantiteWithPrixtotal,
+            'title'=>"Livraisons créées entre ".$dateStart." et ".$dateEnd,
+        ]);
+    }
 }

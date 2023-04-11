@@ -81,6 +81,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('commandeLivre', [CommandeController::class, 'livre'])->name('commande.livre');
         Route::get('commandeToday', [CommandeController::class, 'today'])->name('commande.today');
         Route::get('commandeTomorrow', [CommandeController::class, 'tomorrow'])->name('commande.tomorrow');
+        Route::get('commandeByDateCreate', [CommandeController::class, 'getByDateCreate'])->name('commande.getByDateCreate');
+        Route::get('commandeByDateCreateList', [CommandeController::class, 'getByDateCreateList'])->name('commande.getByDateCreateList');
     });
     
 });
