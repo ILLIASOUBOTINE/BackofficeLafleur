@@ -4,7 +4,7 @@
             {{ __('Produit') }}
         </h2>
     </x-slot>
-    <x-nav-produit :categories='$categories' :couleurs='$couleurs' :especeFleurs='$especeFleurs'/>
+    <x-nav-tableau_produit/>
     <div class="container mt-6">
         <div class="row d-flex justify-content-center">
             @if ($errors->any())
@@ -16,14 +16,9 @@
                     </ul>
                 </div>
             @endif
-            @if ($e != null)
-                <div class="alert alert-danger col-md-8">
-                   {{$e}}
-                </div>
-            @endif
+           
             <div class="col-md-8">
-                <a href="{{ route('produit.create') }}" class="btn btn-success mb-3">Create</a>
-                <table class="table align-middle table-hover">
+                <table class="table table-hover align-middle">
                     <thead>
                         <tr>
                             <th scope="col">id</th>
@@ -31,6 +26,7 @@
                             <th scope="col">prix</th>
                             <th scope="col">quantiteTotale</th>
                             <th scope="col">ventesTotales</th>
+                           
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -50,12 +46,14 @@
                                 
                                     <td>{{$produit->quantiteTotale}}</td>
                                     <td>{{$produit->ventesTotales}}</td>
+                                    
                                     <td><a href="{{ route('produit.show', $produit->idproduit) }}" class="btn btn-info">details</a></td>
                                 </tr>
                             
                         @endforeach 
                     </tbody>
                 </table>
+               
             </div>
         </div>    
     </div>

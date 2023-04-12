@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorie;
+use App\Models\Couleur;
+use App\Models\EspeceFleur;
 use App\Models\Fleur;
 use App\Models\Photo;
 use App\Models\Produit;
 use App\Models\Unite;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ProduitController extends Controller
@@ -18,12 +21,49 @@ class ProduitController extends Controller
      */
     public function index()
     {
+
         
-        $produitsWithFleuresQuantite = Produit::with(['fleures' => function ($query) {
-            $query->select('fleures.*', 'produit_has_fleures.quantite');
-        }])->get();
+        // $categories = Categorie::all();
+        // $photos = Photo::all();
+        // $especeFleurs = EspeceFleur::all();
+        // $couleurs = Couleur::all();
+        
+        // $produitsWithFleuresQuantite = Produit::with(['fleures' => function ($query) {
+        //     $query->select('fleures.*', 'produit_has_fleures.quantite');
+        // }])->get();
       
-        return view('produit.index', ['produitsWithFleuresQuantite'=>$produitsWithFleuresQuantite]);
+        // $e = request('error');
+        
+        // return view('produit.index', [
+        //     'produitsWithFleuresQuantite'=>$produitsWithFleuresQuantite,
+        //     'categories'=>$categories,
+        //     'photos'=>$photos,
+        //     'especeFleurs'=>$especeFleurs,
+        //     'couleurs'=>$couleurs,
+        //     'e'=>$e
+
+        // ]);
+        
+         
+        $produits = Produit::all();
+        $categories = Categorie::all();
+        
+        $especeFleurs = EspeceFleur::all();
+        $couleurs = Couleur::all();
+        
+       
+      
+        $e = request('error');
+        
+        return view('produit.index', [
+            'produits'=>$produits,
+            'categories'=>$categories,
+          
+            'especeFleurs'=>$especeFleurs,
+            'couleurs'=>$couleurs,
+            'e'=>$e
+
+        ]);
        
     }
 
@@ -62,7 +102,7 @@ class ProduitController extends Controller
             'longueur' => 'nullable|integer|min:1',
             'prix_unite' => 'required|numeric|min:0|max:999.99',
             'description' => 'required|min:10|max:255',
-            'quantiteTotale' => 'required|integer|min:1',
+            'quantiteTotale' => 'required|integer|min:0',
             'categories' => 'required',
             'photos' => 'required',
             'fleures' => 'required',
@@ -143,7 +183,7 @@ class ProduitController extends Controller
             'longueur' => 'nullable|integer|min:1',
             'prix_unite' => 'required|numeric|min:0|max:999.99',
             'description' => 'required|min:10|max:255',
-            'quantiteTotale' => 'required|integer|min:1',
+            'quantiteTotale' => 'required|integer|min:0',
             'categories' => 'required',
             'photos' => 'required',
             'fleures' => 'required',
@@ -188,4 +228,157 @@ class ProduitController extends Controller
         $produit->delete();
         return redirect()->route('produit.index');
     }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getByCategorie($id)
+    {
+       
+        $nom = Categorie::findOrFail($id)->nom;
+        $categories = Categorie::all();
+        $photos = Photo::all();
+        $especeFleurs = EspeceFleur::all();
+        $couleurs = Couleur::all();
+        
+        $produitsWithFleuresQuantite = Produit::with(['fleures' => function ($query) {
+            $query->select('fleures.*', 'produit_has_fleures.quantite');
+        }])
+        ->whereHas('categories', function($query) use($id) {
+            $query->where('idcategorie', $id);
+        })->get();
+        
+      
+        return view('produit.result', [
+            'produitsWithFleuresQuantite'=>$produitsWithFleuresQuantite,
+            'categories'=>$categories,
+            'photos'=>$photos,
+            'especeFleurs'=>$especeFleurs,
+            'couleurs'=>$couleurs,
+            'nom'=>'Categorie/'.$nom,
+        
+        ]);
+       
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getByCouleur($id)
+    {
+       
+        $nom = Couleur::findOrFail($id)->nom;
+        $categories = Categorie::all();
+        $photos = Photo::all();
+        $especeFleurs = EspeceFleur::all();
+        $couleurs = Couleur::all();
+        
+        $produitsWithFleuresQuantite = Produit::with(['fleures' => function ($query) {
+            $query->select('fleures.*', 'produit_has_fleures.quantite');
+        }])
+        ->whereHas('fleures.couleur', function($query) use($id) {
+            $query->where('idcouleur', $id);
+        })->get();
+        
+      
+        return view('produit.result', [
+            'produitsWithFleuresQuantite'=>$produitsWithFleuresQuantite,
+            'categories'=>$categories,
+            'photos'=>$photos,
+            'especeFleurs'=>$especeFleurs,
+            'couleurs'=>$couleurs,
+            'nom'=>'Couleur/'.$nom,
+        
+        ]);
+       
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getByNomFleur($id)
+    {
+       
+        $nom = EspeceFleur::findOrFail($id)->nom;
+        $categories = Categorie::all();
+        $photos = Photo::all();
+        $especeFleurs = EspeceFleur::all();
+        $couleurs = Couleur::all();
+        
+        $produitsWithFleuresQuantite = Produit::with(['fleures' => function ($query) {
+            $query->select('fleures.*', 'produit_has_fleures.quantite');
+        }])
+        ->whereHas('fleures.espece_fleur', function($query) use($id) {
+            $query->where('idespece_fleur', $id);
+        })->get();
+        
+      
+        return view('produit.result', [
+            'produitsWithFleuresQuantite'=>$produitsWithFleuresQuantite,
+            'categories'=>$categories,
+            'photos'=>$photos,
+            'especeFleurs'=>$especeFleurs,
+            'couleurs'=>$couleurs,
+            'nom'=>'Nom de la fleur/'.$nom,
+        
+        ]);
+       
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getById(Request $request)
+    {
+        // dd($request);
+        $request->validate([
+            'id' => 'required|integer|min:1',
+            
+        ]);
+        
+        try {
+             $produit = Produit::findOrFail($request->input('id'));
+        }catch (ModelNotFoundException $error){
+            return redirect()->route('produit.index',['error'=>"la produit avec id = ".$request->input('id')."  n'existe pas"]);
+        }
+       
+        return redirect()->route('produit.show',$produit);
+    }
+
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getByNom(Request $request)
+    {
+        // dd($request);
+        $request->validate([
+            'nom' => 'required|max:45',
+            
+        ]);
+        
+        
+        $produit = Produit::where('nom',$request->input('nom'))->first();
+        if(!$produit){
+            return redirect()->route('produit.index',['error'=>"la produit avec nom = ".$request->input('nom')."  n'existe pas"]);
+        }
+       
+        return redirect()->route('produit.show',$produit);
+    }
+
 }

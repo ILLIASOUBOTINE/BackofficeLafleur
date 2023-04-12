@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Produit') }}
+            {{ __('Produit/') }}{{$title}}
         </h2>
     </x-slot>
-    <x-nav-produit :categories='$categories' :couleurs='$couleurs' :especeFleurs='$especeFleurs'/>
+    <x-nav-tableau_produit/>
     <div class="container mt-6">
         <div class="row d-flex justify-content-center">
             @if ($errors->any())
@@ -16,14 +16,9 @@
                     </ul>
                 </div>
             @endif
-            @if ($e != null)
-                <div class="alert alert-danger col-md-8">
-                   {{$e}}
-                </div>
-            @endif
+           
             <div class="col-md-8">
-                <a href="{{ route('produit.create') }}" class="btn btn-success mb-3">Create</a>
-                <table class="table align-middle table-hover">
+                <table class="table table-hover align-middle">
                     <thead>
                         <tr>
                             <th scope="col">id</th>
@@ -31,12 +26,13 @@
                             <th scope="col">prix</th>
                             <th scope="col">quantiteTotale</th>
                             <th scope="col">ventesTotales</th>
+                            <th scope="col">vendu</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($produits as $produit)
-                           
+                        {{-- @foreach ($produitsVendus as $produit) --}}
+                        @foreach ($produits as $produit)   
                                 <tr @if($produit->quantiteTotale == 0)
                                     {{$color = "text-bg-danger"}}
                                 @elseif($produit->quantiteTotale > 5)
@@ -50,12 +46,24 @@
                                 
                                     <td>{{$produit->quantiteTotale}}</td>
                                     <td>{{$produit->ventesTotales}}</td>
+                                    @if(in_array($produit->idproduit,array_map(fn($value) => $value['idproduit'], $produitsVendus->toArray())))
+                                        @foreach ($produitsVendus as $produitsVendu) 
+                                        @if($produitsVendu->idproduit == $produit->idproduit)
+                                            <td>{{$produitsVendu->total_quantite}}</td>
+                                        @endif
+                                        
+                                    @endforeach
+                                    @else
+                                        <td>0</td>
+                                    @endif
+                                    
                                     <td><a href="{{ route('produit.show', $produit->idproduit) }}" class="btn btn-info">details</a></td>
                                 </tr>
                             
                         @endforeach 
                     </tbody>
                 </table>
+               
             </div>
         </div>    
     </div>

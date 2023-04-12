@@ -11,6 +11,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TableauProduitController;
 use App\Http\Controllers\UniteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('produit', ProduitController::class);
         Route::resource('commande', CommandeController::class);
         
+        // commande
         Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
         Route::get('commandeByDate', [CommandeController::class, 'getByDate'])->name('commande.getByDate');
         Route::get('commandeNonLivres', [CommandeController::class, 'nonLivres'])->name('commande.nonLivres');
@@ -83,6 +85,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('commandeTomorrow', [CommandeController::class, 'tomorrow'])->name('commande.tomorrow');
         Route::get('commandeByDateCreate', [CommandeController::class, 'getByDateCreate'])->name('commande.getByDateCreate');
         Route::get('commandeByDateCreateList', [CommandeController::class, 'getByDateCreateList'])->name('commande.getByDateCreateList');
+
+        // produit
+        Route::get('produitById', [ProduitController::class, 'getById'])->name('produit.getById');
+        Route::get('produitByNom', [ProduitController::class, 'getByNom'])->name('produit.getByNom');
+        Route::get('produit/categorie/{id}', [ProduitController::class, 'getByCategorie'])->name('produit.categorie');
+        Route::get('produit/couleur/{id}', [ProduitController::class, 'getByCouleur'])->name('produit.couleur');
+        Route::get('produit/espece_fleur/{id}', [ProduitController::class, 'getByNomFleur'])->name('produit.espece_fleur');
+
+        // tableau produit
+        Route::get('tableau_produit', [TableauProduitController::class, 'index'])->name('tableau_produit');
+        Route::get('tableau_produit/vendu', [TableauProduitController::class, 'getByDateListProduitVendu'])->name('tableau_produit.vendu');
+        
     });
     
 });
