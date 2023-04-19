@@ -94,6 +94,7 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
+        $categorie->produits()->detach();
         $categorie->delete();
         return redirect()->route('categorie.index');
     }

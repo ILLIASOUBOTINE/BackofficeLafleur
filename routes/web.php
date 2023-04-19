@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CadeauController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CouleurController;
@@ -75,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('fleur', FleurController::class);
         Route::resource('produit', ProduitController::class);
         Route::resource('commande', CommandeController::class);
+        Route::resource('cadeau', CadeauController::class);
         
         // commande
         Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');

@@ -30,4 +30,8 @@ class Commande extends Model
     public function produits():BelongsToMany {
         return $this->belongsToMany(Produit::class, 'produit_has_commandes','commandes_idcommandes','produit_idproduit');
     }
+
+    public function cadeaux():BelongsToMany {
+        return $this->belongsToMany(Cadeau::class, 'cadeau_has_commandes','commandes_idcommandes','cadeau_idcadeau');
+    }
 }

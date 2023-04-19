@@ -4,7 +4,9 @@
             {{ __('Produit') }}
         </h2>
     </x-slot>
+    
     <x-nav-tableau_produit/>
+
     <div class="container mt-6">
         <div class="row d-flex justify-content-center">
             @if ($errors->any())

@@ -16,4 +16,8 @@ class Photo extends Model
     public function produits(): BelongsToMany{
         return $this->belongsToMany(Produit::class, 'photo_has_produit', 'photo_idphoto', 'produit_idproduit');
     }
+
+    public function cadeau() {
+        return $this->hasOne(Cadeau::class);
+    }
 }

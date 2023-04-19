@@ -24,41 +24,44 @@
 
                         <div class="dropdown-menu ">
                             <div class="d-flex flex-column">
-                                <x-nav-link :href="route('espece_fleur.index')" :active="request()->routeIs('espece_fleur')">
+                                <x-nav-link :href="route('espece_fleur.index')" :active="request()->routeIs('espece_fleur.index')">
                                     {{ __('Espece_fleur') }}
                                 </x-nav-link>
-                                <x-nav-link :href="route('couleur.index')" :active="request()->routeIs('couleur')">
+                                <x-nav-link :href="route('couleur.index')" :active="request()->routeIs('couleur.index')">
                                     Couleur
                                 </x-nav-link>
-                                <x-nav-link :href="route('unite.index')" :active="request()->routeIs('unite')">
+                                <x-nav-link :href="route('unite.index')" :active="request()->routeIs('unite.index')">
                                     Unite
                                 </x-nav-link>
-                                <x-nav-link :href="route('notre_livraison.index')" :active="request()->routeIs('notre_livraison')">
+                                <x-nav-link :href="route('notre_livraison.index')" :active="request()->routeIs('notre_livraison.index')">
                                     Notre_livraison 
                                 </x-nav-link>
-                                <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie')">
+                                <x-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie.index')">
                                     Categorie
                                 </x-nav-link>
-                                <x-nav-link :href="route('photo.index')" :active="request()->routeIs('photo')">
+                                <x-nav-link :href="route('photo.index')" :active="request()->routeIs('photo.index')">
                                     Photo
                                 </x-nav-link>
                             </div>
                         </div>
                     </div>
-                   <x-nav-link :href="route('livraison.index')" :active="request()->routeIs('livraison')">
+                   <x-nav-link :href="route('livraison.index')" :active="request()->routeIs('livraison.index')">
                        Livraison
                     </x-nav-link>
-                    <x-nav-link :href="route('fleur.index')" :active="request()->routeIs('fleur')">
+                    <x-nav-link :href="route('fleur.index')" :active="request()->routeIs('fleur.index')">
                         Fleur
                     </x-nav-link>
-                    <x-nav-link :href="route('produit.index')" :active="request()->routeIs('produit')">
+                    <x-nav-link :href="route('produit.index')" :active="request()->routeIs('produit.index')">
                         Produit
                     </x-nav-link>
-                    <x-nav-link :href="route('commande.index')" :active="request()->routeIs('commande')">
+                    <x-nav-link :href="route('commande.index')" :active="request()->routeIs('commande.index')">
                         Commande
                     </x-nav-link>
                     <x-nav-link :href="route('tableau_produit')" :active="request()->routeIs('tableau_produit')">
                         tableau_produit
+                    </x-nav-link>
+                    <x-nav-link :href="route('cadeau.index')" :active="request()->routeIs('cadeau.index')">
+                        Cadeau
                     </x-nav-link>
                     @endhasanyrole
                     

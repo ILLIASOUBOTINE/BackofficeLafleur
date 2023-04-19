@@ -94,6 +94,7 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
+        $photo->produits()->detach();
         $photo->delete();
         return redirect()->route('photo.index');
     }
