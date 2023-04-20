@@ -31,7 +31,7 @@
                     <li class="list-group-item d-flex flex-column  mb-3">
                         <p><span class="fw-semibold">id:</span> {{$commande->idcommandes}}</p>
                         <p><span class="fw-semibold">date_create:</span> {{$commande->date_create}} </p>
-                        <p><span class="fw-semibold">frais de livraison:</span> {{$commande->frais_livraison}}$</p>
+                       
                         {{-- <p><span class="fw-semibold">num_commande:</span> {{$commande->num_commande}}</p> --}}
                         <div class="mb-3">
                             <p class="fw-semibold">client:</p>
@@ -63,7 +63,19 @@
                                 </a>    
                             </div>
                         </div>
-                        
+                        @if(count($commande->cadeaux) !== 0)
+                            <div class="mb-3">
+                                <p class="fw-semibold">cadeau:</p>
+                                <div class="list-group">
+                                    @foreach($commande->cadeaux as $cadeau)
+                                        <a href="{{ route('cadeau.edit', $cadeau->idcadeau) }}" class="list-group-item list-group-item-action">
+                                            <p class="mb-1"><span class="fw-semibold">id: </span>{{$cadeau->idcadeau}}</p>
+                                            <p class="mb-1"><span class="fw-semibold">nom: </span>{{$cadeau->nom}}</p>
+                                        </a>  
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif 
                         <div class="list-group">
                             <p class="fw-semibold">produit:</p>
                             @foreach ($commande->produits as $produit)

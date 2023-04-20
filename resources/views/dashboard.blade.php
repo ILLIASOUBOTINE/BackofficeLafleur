@@ -9,13 +9,12 @@
     <div class="row">
     <div class="col-md-12">
         <div class="card" >
-            <div class="card-header">Card title</div>
+            <div class="card-header">LaFleur</div>
             <div class="card-body">
                 
-                <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                <p class="card-text text-red">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Information</h6>
+                <p class="card-text text-red">Cette application est destinée aux employés du magasin. Conformément à vos obligations, vous disposez des droits d'accès appropriés. Si vos responsabilités changent, contactez votre administrateur pour modifier votre accès.</p>
+                
             </div>
         </div>
     </div>

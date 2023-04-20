@@ -8,6 +8,7 @@
     <div class="container mt-6">
         <div class="row d-flex justify-content-center">
             <div class="col-md-6">
+            <a href="{{ route('user.create') }}" class="btn btn-success mb-3">Create</a>
                 {{-- @if(auth()->user()->can('create'))
                     <a href="{{ route('user.create') }}" class="btn btn-success mb-3">Create</a>
                 @endif --}}

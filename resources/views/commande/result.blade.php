@@ -32,7 +32,7 @@
                     <li class="list-group-item d-flex flex-column  mb-3">
                         <p><span class="fw-semibold">id:</span> {{$commande->idcommandes}}</p>
                         <p><span class="fw-semibold">date_create:</span> {{$commande->date_create}} </p>
-                        <p><span class="fw-semibold">frais de livraison:</span> {{$commande->frais_livraison}}$</p>
+                       
                         {{-- <p><span class="fw-semibold">num_commande:</span> {{$commande->num_commande}}</p> --}}
                         <div class="mb-3">
                             <p class="fw-semibold">client:</p>
@@ -64,7 +64,19 @@
                                 </a>    
                             </div>
                         </div>
-                        
+                        @if(count($commande->cadeaux) !== 0)
+                            <div class="mb-3">
+                                <p class="fw-semibold">cadeau:</p>
+                                <div class="list-group">
+                                    @foreach($commande->cadeaux as $cadeau)
+                                        <a href="{{ route('cadeau.edit', $cadeau->idcadeau) }}" class="list-group-item list-group-item-action">
+                                            <p class="mb-1"><span class="fw-semibold">id: </span>{{$cadeau->idcadeau}}</p>
+                                            <p class="mb-1"><span class="fw-semibold">nom: </span>{{$cadeau->nom}}</p>
+                                        </a>  
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif 
                         <div class="list-group">
                             <p class="fw-semibold">produit:</p>
                             @foreach ($commande->produits as $produit)
@@ -80,12 +92,11 @@
                         </div>
                         <p><span class="fw-semibold">frais de livraison:</span> {{$commande->frais_livraison}}$</p>
                         <p><span class="fw-semibold">le montant payé: </span>{{$commande->total_commande + $commande->frais_livraison}}$</p>
-
-                         {{-- <div class="d-flex justify-content-between my-3">
-                            <x-btn-edit  route="{{ route('produit.edit', $produit->idproduit) }}"/>
-                            <a href="{{ route('produit.show', $produit->idproduit) }}" class="btn btn-success">show</a>
-                            <x-btn-delete  route="{{route('produit.destroy', $produit->idproduit)}}"/>
-                        </div> --}}
+                        @if(Route::currentRouteName() == 'commande.today')
+                            <div class="d-flex justify-content-end my-3">
+                                <a href="{{ route('setDateLivre', $commande->livraison->idlivraison) }}" class="btn btn-success ">livré</a>
+                            </div>
+                        @endif
                     </li>
                 @endforeach 
                 </ul>

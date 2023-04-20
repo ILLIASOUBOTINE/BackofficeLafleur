@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create',);
     }
 
     /**
@@ -38,7 +38,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required|max:255',
+            
+        ]);
+
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        
+        $user->save();
+        
+        return redirect()->route('user.index');
+
+        
     }
 
     /**
@@ -91,6 +107,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+       User::destroy($user->id);
+        return redirect()->route('user.index');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\EspeceFleurController;
 use App\Http\Controllers\FleurController;
 use App\Http\Controllers\LivraisonController;
+use App\Http\Controllers\LivreurController;
 use App\Http\Controllers\NotreLivraisonController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProduitController;
@@ -79,12 +80,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('cadeau', CadeauController::class);
         
         // commande
-        Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
+        // Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
         Route::get('commandeByDate', [CommandeController::class, 'getByDate'])->name('commande.getByDate');
         Route::get('commandeNonLivres', [CommandeController::class, 'nonLivres'])->name('commande.nonLivres');
         Route::get('commandeLivre', [CommandeController::class, 'livre'])->name('commande.livre');
-        Route::get('commandeToday', [CommandeController::class, 'today'])->name('commande.today');
-        Route::get('commandeTomorrow', [CommandeController::class, 'tomorrow'])->name('commande.tomorrow');
+        // Route::get('commandeToday', [CommandeController::class, 'today'])->name('commande.today');
+        // Route::get('commandeTomorrow', [CommandeController::class, 'tomorrow'])->name('commande.tomorrow');
         Route::get('commandeByDateCreate', [CommandeController::class, 'getByDateCreate'])->name('commande.getByDateCreate');
         Route::get('commandeByDateCreateList', [CommandeController::class, 'getByDateCreateList'])->name('commande.getByDateCreateList');
 
@@ -100,6 +101,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tableau_produit/vendu', [TableauProduitController::class, 'getByDateListProduitVendu'])->name('tableau_produit.vendu');
         
     });
+
+    Route::group(['middleware' => ['role:admin|super-user|livreur']], function () { 
+        // Route::resource('livraison', LivraisonController::class);
+        // Route::resource('commande', CommandeController::class);
+        // Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
+     
+        Route::get('commandeToday', [CommandeController::class, 'today'])->name('commande.today');
+        Route::get('commandeTomorrow', [CommandeController::class, 'tomorrow'])->name('commande.tomorrow');
+        Route::get('livreur/today', [LivreurController::class, 'today'])->name('livreur.today');
+        Route::get('setDateLivre/{id}', [LivraisonController::class, 'setDateLivre'])->name('setDateLivre');
+    });
+
+   
     
 });
 

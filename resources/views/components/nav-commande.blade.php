@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary mb-3">
             <div class="container-fluid" style="max-width: 1280px !important">
+                @hasanyrole('super-user|admin')
                 <a class="navbar-brand" href="{{ route('commande.index') }}">Tous</a>
+                @endhasanyrole
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -17,27 +19,32 @@
                             <div class="collapse" id="collapseExample">
                                 
                                     <ul class="navbar-nav me-auto mb-2 mb-md-0 d-flex flex-column ">
+                                       
                                             <li class="nav-item">
                                                 <a class="me-lg-2 mb-1 mb-xl-0 btn btn-warning" aria-current="page" href="{{ route('commande.tomorrow') }}">Livraison demain</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="me-lg-2 mb-1 mb-xl-0 btn btn-danger" aria-current="page" href="{{ route('commande.today') }}">Expédition aujourd'hui</a>
                                             </li>
+                                            @hasanyrole('super-user|admin')
                                             <li class="nav-item">
                                                 <a href="{{ route('commande.nonLivres') }}" class="me-lg-2 mb-1 mb-xl-0 btn btn-secondary" aria-current="page" >Non livrés</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="me-lg-2 mb-1 mb-xl-0 btn btn-info" aria-current="page" href="{{ route('commande.livre') }}">Livré</a>
                                             </li>
+                                           @endhasanyrole
                                     </ul>
+                                    @hasanyrole('super-user|admin')
                                     <form action="{{ route('commande.getByDate') }}" method="GET" class="d-flex me-lg-3 mb-1 mb-xl-0" role="search">
                                         @csrf
                                         <input class="form-control me-2" name="date_prev"  type="date"  aria-label="Search">
                                         <button class="btn btn-outline-info" type="submit">date prevu</button>
                                     </form>
-                            
+                                    @endhasanyrole
                             </div>
                         </div>
+                        @hasanyrole('super-user|admin')
                         <div class="">
                             <p>
                             
@@ -63,13 +70,15 @@
                             
                             </div>
                         </div>   
-                                                  
+                         @endhasanyrole                         
                     </div>
+                     @hasanyrole('super-user|admin')
                    <form action="{{ route('commande.getById') }}" method="GET" class="d-flex mb-1 mb-xl-0" role="search">
                             @csrf
                             <input class="form-control me-2" name="id"  type="number" min="1" placeholder="id" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
+                        @endhasanyrole  
                 </div>    
                 </div>
             </div>

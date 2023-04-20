@@ -18,21 +18,21 @@
             @endif
 
             <div class="col-md-8">
-                
+                <h3 class="my-3 fs-4">Les champs avec (*) sont obligatoires!</h3>
                 <form action="{{ route('cadeau.store') }}" method="POST" class="mb-4 mt-4">
                    @csrf
                   
                     <div class="mb-4">
                         <div class="mb-3">
-                            <label for="cadeau_nom" class="form-label">Nom:</label>
+                            <label for="cadeau_nom" class="form-label">Nom*:</label>
                             <input id="cadeau_nom" type="text" max="100" class="form-control" name="nom" > 
                         </div>
                         <div class="mb-3">
-                            <label for="cadeau_quantite" class="form-label">Quantite:</label>
+                            <label for="cadeau_quantite" class="form-label">Quantite*:</label>
                             <input id="cadeau_quantite" type="number" min="0" class="form-control" name="quantite" > 
                         </div>
                         <div class="mb-3">
-                            <label for="cadeau_photo" class="form-label">Photo:</label>
+                            <label for="cadeau_photo" class="form-label">Photo*:</label>
                             <select id="cadeau_photo" class="form-select" aria-label="Default select example" name="photo" >
                             @foreach($photos as $photo)
                                 <option value="{{$photo->idphoto}}">{{$photo->img_url}}</option>

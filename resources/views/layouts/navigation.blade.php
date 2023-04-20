@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
                     </a>
                 </div>
 
@@ -16,6 +16,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                   
                      @hasanyrole('super-user|admin')
                     <div class="dropdown align-self-center">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,10 +46,10 @@
                             </div>
                         </div>
                     </div>
-                   <x-nav-link :href="route('livraison.index')" :active="request()->routeIs('livraison.index')">
+                   <x-nav-link :href="route('livraison.index')" :active="request()->routeIs(['livraison.index','livraison.create','livraison.edit'])">
                        Livraison
                     </x-nav-link>
-                    <x-nav-link :href="route('fleur.index')" :active="request()->routeIs('fleur.index')">
+                    <x-nav-link :href="route('fleur.index')" :active="request()->routeIs(['fleur.index','fleur.create','fleur.edit'])">
                         Fleur
                     </x-nav-link>
                     <x-nav-link :href="route('produit.index')" :active="request()->routeIs('produit.index')">
@@ -64,7 +65,14 @@
                         Cadeau
                     </x-nav-link>
                     @endhasanyrole
-                    
+
+                    @hasanyrole('super-user|admin|livreur')
+                   
+                    <x-nav-link :href="route('livreur.today')" :active="request()->routeIs('livreur.today')">
+                       Livreur
+                    </x-nav-link>
+                    @endhasanyrole
+
                     @role('super-user')
                     <x-nav-link :href="route('role.index')" :active="request()->routeIs('role')">
                         Roles
@@ -129,6 +137,61 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+             @hasanyrole('super-user|admin')
+                   
+            <x-responsive-nav-link :href="route('espece_fleur.index')" :active="request()->routeIs('espece_fleur.index')">
+                {{ __('Espece_fleur') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('couleur.index')" :active="request()->routeIs('couleur.index')">
+                 Couleur
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('unite.index')" :active="request()->routeIs('unite.index')">
+                 Unite
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('notre_livraison.index')" :active="request()->routeIs('notre_livraison.index')">
+                Notre_livraison 
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categorie.index')" :active="request()->routeIs('categorie.index')">
+                Categorie
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('photo.index')" :active="request()->routeIs('photo.index')">
+                Photo
+            </x-responsive-nav-link>                   
+                    
+                   <x-responsive-nav-link :href="route('livraison.index')" :active="request()->routeIs('livraison.index')">
+                       Livraison
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('fleur.index')" :active="request()->routeIs('fleur.index')">
+                        Fleur
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('produit.index')" :active="request()->routeIs('produit.index')">
+                        Produit
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('commande.index')" :active="request()->routeIs('commande.index')">
+                        Commande
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('tableau_produit')" :active="request()->routeIs('tableau_produit')">
+                        tableau_produit
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('cadeau.index')" :active="request()->routeIs('cadeau.index')">
+                        Cadeau
+                    </x-responsive-nav-link>
+                    @endhasanyrole
+                    @hasanyrole('super-user|admin|livreur')
+                   
+                    <x-responsive-nav-link :href="route('livreur.today')" :active="request()->routeIs('livreur.today')">
+                       Livreur
+                    </x-responsive-nav-link>
+                    @endhasanyrole
+                    
+                    @role('super-user')
+                    <x-responsive-nav-link :href="route('role.index')" :active="request()->routeIs('role')">
+                        Roles
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user')">
+                        User
+                    </x-responsive-nav-link>
+                    @endrole
         </div>
 
         <!-- Responsive Settings Options -->

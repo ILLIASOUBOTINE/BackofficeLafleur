@@ -107,4 +107,21 @@ class LivraisonController extends Controller
     {
         //
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * 
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function setDateLivre($id)
+    {
+        $livraison = Livraison::find($id);
+        $livraison->date_livre = date('Y-m-d');
+     
+        
+        $livraison->save();
+        return redirect()->route('commande.today');
+    }
 }
