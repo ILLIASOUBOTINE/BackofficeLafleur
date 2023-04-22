@@ -11,6 +11,7 @@ use App\Models\Produit;
 use App\Models\Unite;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProduitController extends Controller
 {
@@ -179,7 +180,11 @@ class ProduitController extends Controller
     public function update(Request $request, Produit $produit)
     {
         $request->validate([
-            'nom' => 'required|max:45',
+            'nom' =>[
+                'required',
+                Rule::unique('produit')->ignore($produit->idproduit, 'idproduit'),
+                'max:45' 
+            ],
             'longueur' => 'nullable|integer|min:1',
             'prix_unite' => 'required|numeric|min:0|max:999.99',
             'description' => 'required|min:10|max:255',
@@ -225,6 +230,7 @@ class ProduitController extends Controller
         $produit->categories()->detach(); 
         $produit->photos()->detach(); 
         $produit->fleures()->detach();
+        $produit->events()->detach();
         $produit->delete();
         return redirect()->route('produit.index');
     }

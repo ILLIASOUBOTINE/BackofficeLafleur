@@ -30,7 +30,7 @@
                                     <td> {{$banniereEvent->date_debut}}</td>
                                     <td>{{$banniereEvent->date_fin}}</td>
                                    
-                                    <td><a href="{{ route('banniere_event.show', $banniereEvent->idbanniere_event) }}" class="btn btn-info">details</a></td>
+                                    <td class="text-center"><a href="{{ route('banniere_event.show', $banniereEvent->idbanniere_event) }}" class="btn btn-info">details</a></td>
                                 </tr>
                             
                         @endforeach 

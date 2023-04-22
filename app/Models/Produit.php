@@ -34,4 +34,8 @@ class Produit extends Model
     public function commandes() {
         return $this->belongsToMany(Produit::class, 'produit_has_commandes','produit_idproduit','commandes_idcommandes');
     }
+
+    public function events() {
+        return $this->belongsToMany(BanniereEvent::class, 'banniere_event_has_produit','produit_idproduit','banniere_event_idbanniere_event');
+    }
 }
