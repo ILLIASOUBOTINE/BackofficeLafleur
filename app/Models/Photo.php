@@ -20,4 +20,10 @@ class Photo extends Model
     public function cadeau() {
         return $this->hasOne(Cadeau::class);
     }
+
+    public function banniereEvent() {
+        return $this->hasOne(BanniereEvent::class);
+    }
+
+    
 }

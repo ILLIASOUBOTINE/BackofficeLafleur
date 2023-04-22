@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BanniereEventController;
 use App\Http\Controllers\CadeauController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
@@ -78,9 +79,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('produit', ProduitController::class);
         Route::resource('commande', CommandeController::class);
         Route::resource('cadeau', CadeauController::class);
+        Route::resource('banniere_event', BanniereEventController::class);
         
         // commande
-        // Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
+        Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
         Route::get('commandeByDate', [CommandeController::class, 'getByDate'])->name('commande.getByDate');
         Route::get('commandeNonLivres', [CommandeController::class, 'nonLivres'])->name('commande.nonLivres');
         Route::get('commandeLivre', [CommandeController::class, 'livre'])->name('commande.livre');
@@ -103,9 +105,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['middleware' => ['role:admin|super-user|livreur']], function () { 
-        // Route::resource('livraison', LivraisonController::class);
-        // Route::resource('commande', CommandeController::class);
-        // Route::get('commandeById', [CommandeController::class, 'getById'])->name('commande.getById');
+        
      
         Route::get('commandeToday', [CommandeController::class, 'today'])->name('commande.today');
         Route::get('commandeTomorrow', [CommandeController::class, 'tomorrow'])->name('commande.tomorrow');

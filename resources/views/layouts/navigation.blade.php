@@ -64,6 +64,9 @@
                     <x-nav-link :href="route('cadeau.index')" :active="request()->routeIs('cadeau.index')">
                         Cadeau
                     </x-nav-link>
+                    <x-nav-link :href="route('banniere_event.index')" :active="request()->routeIs('banniere_event.index')">
+                        Event
+                    </x-nav-link>
                     @endhasanyrole
 
                     @hasanyrole('super-user|admin|livreur')
@@ -176,6 +179,10 @@
                     <x-responsive-nav-link :href="route('cadeau.index')" :active="request()->routeIs('cadeau.index')">
                         Cadeau
                     </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('banniere_event.index')" :active="request()->routeIs('banniere_event.index')">
+                        Event
+                    </x-responsive-nav-link>
+                    
                     @endhasanyrole
                     @hasanyrole('super-user|admin|livreur')
                    
